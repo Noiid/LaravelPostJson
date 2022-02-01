@@ -1,0 +1,93 @@
+Struktur database:
+
+- Company
+    1. id_company
+    2. name_company
+
+- Company Contacts
+    1. id_company_contact
+    2. id_company
+    3. phone
+    4. email
+
+- Training Module
+    1. id_training_module
+    2. id_company
+    3. module_name
+    4. average_training_hour
+
+- Employees
+    1. id_employees
+    2. id_company
+    3. first_name
+    4. last_name
+    5. age
+    6. gender
+    7. department
+    8. start_date_of_employment
+
+
+- Contact Employees
+    1. id_contact_employees
+    2. id_employee
+    2. phone
+    3. email
+
+- Training Employees
+    1. id_trainig_employees
+    2. id_employee
+    3. module_attended
+    4. test_date
+    5. training_hour
+    6. error
+    7. status
+    8. renewal_date
+
+
+    csrf_token = wIy5wAqcgjai8g79q3RxlI1BVBCpDi0apKMdQLoh
+
+SAMPLE DATA :
+{
+   "Company":"mycompany",
+   "companycontacts":{
+      "phone":"123-123-1234",
+      "email":"myemail@domain.com"
+   },
+   "TrainingModule":[
+	   	{"ModuleName":"FireFighting","AverageTrainingHour": 1},
+	   	{"ModuleName":"Evacuation","AverageTrainingHour": 2}
+   	],
+   "Employees":[
+      {
+         "FirstName":"Tony",
+         "LastName":"Dep",
+         "Age":24,
+         "Gender":"Male",
+         "Department":"HSE",
+         "contact":{
+            "phone":"123-123-1234",
+            "email":"myemail@domain.com"
+         },
+         "StartDateofEmployment":"12-12-2021",
+		"Training": [
+			{"ModuleAttended":"FireFighting", "Date": "12-12-2021", "TrainingHour":0.58, "Error": 0, "Status":"Passed/complete", "RenewalDate":"12-12-2022"},
+			{"ModuleAttended":"Evacuation", "Date": "12-12-2021", "TrainingHour":1, "Error": 2,"Status":"Passed/complete", "RenewalDate":"12-12-2022"}
+	      ]
+      },
+      {
+         "FirstName":"Henry",
+         "LastName":"Joe",
+         "Age":24,
+         "Gender":"Male",
+         "Department":"HSE",
+		 "contact":{
+            "phone":"123-123-1234",
+            "email":"myemail@domain.com"
+         },
+         "StartDateofEmployment":"12-12-2021",
+         "Training": [
+         	{"ModuleAttended":"FireFighting", "Date": "12-12-2021", "TrainingHour":0.58, "Error": 0, "Status":"Passed/complete", "RenewalDate":"12-12-2022"},
+         	{"ModuleAttended":"Evacuation", "Date": "12-12-2021", "TrainingHour":1, "Error": 10, "Status":"Passed/incomplete", "RenewalDate":"12-12-2022"}]}]}
+
+
+
