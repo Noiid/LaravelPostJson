@@ -51,23 +51,26 @@ class CompanyController extends Controller
             $company = new Company();
             $company->name_company = $request->input('Company');
             $company->save();
-        }
 
-        $contact_company = $request->input('companycontacts');
-        CompanyContacts::create([
-            'id_company' => $company->id_company,
-            'phone' => $contact_company['phone'],
-            'email' => $contact_company['email']
-        ]);
-
-        $training_module = $request->input('TrainingModule');
-        foreach ($training_module as $module) {
-            TrainingModule::create([
+            $contact_company = $request->input('companycontacts');
+            CompanyContacts::create([
                 'id_company' => $company->id_company,
-                'module_name' => $module['ModuleName'],
-                'average_training_hour' => $module['AverageTrainingHour']
+                'phone' => $contact_company['phone'],
+                'email' => $contact_company['email']
             ]);
         }
+
+        $training_module = $request->input('TrainingModule');
+        if($training_module!=null){
+            foreach ($training_module as $module) {
+                TrainingModule::create([
+                    'id_company' => $company->id_company,
+                    'module_name' => $module['ModuleName'],
+                    'average_training_hour' => $module['AverageTrainingHour']
+                ]);
+            }
+        }
+
 
         $employee = $request->input('Employees');
         $contact = null;
