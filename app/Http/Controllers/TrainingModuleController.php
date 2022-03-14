@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TrainingModule;
+use App\Company;
 use Illuminate\Http\Request;
 
 class TrainingModuleController extends Controller
@@ -14,7 +15,9 @@ class TrainingModuleController extends Controller
      */
     public function index()
     {
-        //
+        $modules = TrainingModule::all();
+
+        return view('Modul.index',['modules' => $modules]);
     }
 
     /**
@@ -24,7 +27,8 @@ class TrainingModuleController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('Company.add_unit',['companies' => $companies]);
     }
 
     /**
@@ -35,7 +39,9 @@ class TrainingModuleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        TrainingModule::create($request->all());
+
+        return redirect('/company')->with('success','Berhasil menambahkan module baru!');
     }
 
     /**

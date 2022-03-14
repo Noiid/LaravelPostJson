@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
+use App\ContactEmployees;
 use App\Employees;
+use App\TrainingEmployees;
+use App\TrainingModule;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -14,7 +18,9 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employees::all();
+
+        return view('Employee.index',['employees' => $employees]);
     }
 
     /**
@@ -24,7 +30,8 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('Employee.add_employee',['companies' => $companies]);
     }
 
     /**
@@ -35,7 +42,23 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employees();
+        $employee->id_company = $request->id_company;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->age = $request->age;
+        $employee->gender = $request->gender;
+        $employee->department = $request->department;
+        $employee->start_date_of_employment = $request->start_date_of_employment;
+        $employee->save();
+
+        ContactEmployees::create([
+            'id_employees' => $employee->id_employees,
+            'phone' => $request->phone,
+            'email' => $request->email
+        ]);
+
+        return redirect('/employee/show/'.$employee->id_employees)->with('success','Berhasil menambahkan employee baru!');
     }
 
     /**
@@ -44,9 +67,12 @@ class EmployeesController extends Controller
      * @param  \App\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function show(Employees $employees)
+    public function show($id)
     {
-        //
+        $employee = Employees::find($id);
+        $all_module = TrainingModule::all();
+        // dd($all_module);
+        return view('Employee.detail',['employee' => $employee, 'all_module' => $all_module]);
     }
 
     /**
@@ -81,5 +107,16 @@ class EmployeesController extends Controller
     public function destroy(Employees $employees)
     {
         //
+    }
+
+    public function filter(Request $request)
+    {
+        $modules = $request->module;
+        if ($modules==null) {
+            $employees['data'] = TrainingEmployees::where('status',$request->status)->with('employees')->get();
+        }else{
+            $employees['data'] = TrainingEmployees::where('status',$request->status)->whereIn('module_attended',$request->module)->with('employees')->get();
+        }
+        return response()->json($employees);
     }
 }

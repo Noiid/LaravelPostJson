@@ -89,5 +89,39 @@ SAMPLE DATA :
          	{"ModuleAttended":"FireFighting", "Date": "12-12-2021", "TrainingHour":0.58, "Error": 0, "Status":"Passed/complete", "RenewalDate":"12-12-2022"},
          	{"ModuleAttended":"Evacuation", "Date": "12-12-2021", "TrainingHour":1, "Error": 10, "Status":"Passed/incomplete", "RenewalDate":"12-12-2022"}]}]}
 
+Revisi :
+
+1. Login => ada 2 hak akses
+    a. Admin => all access
+    b. Supervisor => except : add unit & add employees
+
+2. Tombol purchase units => add unit / add new module traininig
+    => fillable name unit
+    => created_at, updated_at (auto)
+    => column : number_of_participants, number of error (max, min, average),
+        number of training_hour (max, min, average) ,
+        success_percentage (passed, failed) ,
+        type of mistake (mistake A, mistake B) (belum)
+
+3. Tombol Add employee => form fillable column :
+    => FirstName
+    => LastName
+    => Age
+    => Gender
+    => Department
+    => Contact : phone, email
+    => StartDateofEmployment
+
+    Add Training Employee
+    => ModuleAttended
+    => test_date
+    => TrainingHour
+    => Error
+    => Status
+    => RenewalDate
+
+4. Employee Filter berdasarkan => status & module training
+
+5. Tombol Usage Summary => show all employee & all module training by employee
 
 

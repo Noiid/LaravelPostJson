@@ -19,4 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/company', 'CompanyController@store');
-Route::get('/company', 'CompanyController@index');
+// Route::get('/company', 'CompanyController@index');

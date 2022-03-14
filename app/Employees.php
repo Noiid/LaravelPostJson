@@ -32,6 +32,6 @@ class Employees extends Model
 
     public function training_employees()
     {
-        return $this->hasMany('App\Employees','id_employees');
+        return $this->hasMany('App\TrainingEmployees','id_employees','id_employees');
     }
 }

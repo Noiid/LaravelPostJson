@@ -19,7 +19,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return Company::all();
+        $training_module = [['Fire Fighting',100],['Evacuation',130],['Leadership',150],['First Aid',300]];
+        $color_bg = ['red','green','yellow','blue'];
+        $training = TrainingEmployees::all();
+        $status_filter = ['Expiring Soon','Expired','Passed/complete','Passed/incomplete','Started','Not Started'];
+        $module_filter = TrainingModule::all();
+        return view('Company.index',['training_module' => $training_module, 'color_bg' => $color_bg, 'training' => $training,
+        'status_filter' => $status_filter, 'module_filter' => $module_filter]);
     }
 
     /**
@@ -40,9 +46,12 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        $company = new Company();
-        $company->name_company = $request->input('Company');
-        $company->save();
+        $company = Company::where('name_company',$request->input('Company'))->first();
+        if ($company==null) {
+            $company = new Company();
+            $company->name_company = $request->input('Company');
+            $company->save();
+        }
 
         $contact_company = $request->input('companycontacts');
         CompanyContacts::create([
