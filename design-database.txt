@@ -125,6 +125,7 @@ Revisi :
 5. Tombol Usage Summary => show all employee & all module training by employee
 
 
+<<<<<<< HEAD
 contoh data baru :
 {
    "Company":"mycompany",
@@ -177,4 +178,8 @@ contoh data baru :
 	    	{"ModuleAttended":"Evacuation", "MistakeName":"inaccurate", "MistakeType":"skill_type", "NumberOfMistake":1}
 	    	]
       }]}
+=======
+END
+
+>>>>>>> ff67b833230adbaa433327de9fc011041df7b698
 
