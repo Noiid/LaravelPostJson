@@ -1,5 +1,5 @@
 @extends('layouts.dashboard2')
-@section('title','Training Dashboard')
+@section('title','Company Dashboard')
 @section('content-inner')
 <div class="main-content-inner">
     <div class="container-fluid">
@@ -17,13 +17,18 @@
                     <div class="card-body">
                         <h4 class="header-title">Training Module</h4>
                         <div class="row">
-                            @foreach ($training_module as $module)
-                                <div class="col-md-2 text-center @if($loop->last) border-right @endif">
-                                    <div class="txt-circle font-weight-bold" style="background-color: {{ $color_bg[$loop->index] }}; color: white;">{{ $module[1] }}</div><br>
-                                    <div class="label-circle">{{ $module[0] }}</div>
+                            <div class="col-md-8" style="max-height: 350px; overflow-x:auto;">
+                                <div class="row">
+                                    @foreach ($training_module as $module)
+                                        <div class="col-md-3 text-center mt-3">
+                                            <div class="txt-circle font-weight-bold" style="background-color: blue; color: white;">{{ count($training->where('module_attended',$module->module_name)) }}</div><br>
+                                            <div class="label-circle">{{ $module->module_name }}</div>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
-                            <div class="col-md-2">
+                            </div>
+
+                            <div class="col-md-4">
                                 <div class="vl"></div>
                                 <a href="/module/create" class="btn btn-primary">Purchase Units</a><br>
                                 <a href="/module" class="btn btn-secondary mt-3">View Full Summary</a>
@@ -76,15 +81,15 @@
                         <h4 class="header-title">Employee Activity</h4>
                         <div class="row">
                             <div class="col-md-3 text-center">
-                                <div class="txt-underling font-weight-bold">1</div><br>
+                                <div class="txt-underling font-weight-bold">{{ count($emp_expired) }}</div><br>
                                 <div class="label-underling">Employees <b>expired</b> recently</div>
                             </div>
                             <div class="col-md-3 text-center">
-                                <div class="txt-underling font-weight-bold">0</div><br>
+                                <div class="txt-underling font-weight-bold">{{ count($emp_expiring) }}</div><br>
                                 <div class="label-underling">Employees <b>expiring</b> soon</div>
                             </div>
                             <div class="col-md-3 text-center border-right">
-                                <div class="txt-underling font-weight-bold">1</div><br>
+                                <div class="txt-underling font-weight-bold">{{ count($emp_certified) }}</div><br>
                                 <div class="label-underling">Employees <b>certified</b> recently</div>
                             </div>
                             <div class="col-md-3">

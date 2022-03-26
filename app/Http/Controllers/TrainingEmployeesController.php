@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TrainingEmployees;
+use App\TrainingModule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -100,17 +101,23 @@ class TrainingEmployeesController extends Controller
 
     public function getParticipantsModule()
     {
-        $training_fire = TrainingEmployees::where('module_attended','FireFighting')->get();
-        $training_evacuation = TrainingEmployees::where('module_attended','Evacuation')->get();
-        $training_leadership = TrainingEmployees::where('module_attended','Leadership')->get();
-        $training_first = TrainingEmployees::where('module_attended','FirstAid')->get();
+        // $training_fire = TrainingEmployees::where('module_attended','FireFighting')->get();
+        // $training_evacuation = TrainingEmployees::where('module_attended','Evacuation')->get();
+        // $training_leadership = TrainingEmployees::where('module_attended','Leadership')->get();
+        // $training_first = TrainingEmployees::where('module_attended','FirstAid')->get();
 
-        $array['data'] = [
-            ["FireFighting",count($training_fire)],
-            ["Evacuation",count($training_evacuation)],
-            ["Leadership",count($training_leadership)],
-            ["FirstAid",count($training_first)]
-        ];
+        // $array['data'] = [
+        //     ["FireFighting",count($training_fire)],
+        //     ["Evacuation",count($training_evacuation)],
+        //     ["Leadership",count($training_leadership)],
+        //     ["FirstAid",count($training_first)]
+        // ];
+        $module = TrainingModule::select('module_name')->distinct()->get();
+        $array['data'] = [];
+        foreach ($module as $mod) {
+            $count = count(TrainingEmployees::where('module_attended',$mod->module_name)->get());
+            array_push($array['data'],[$mod->module_name, $count]);
+        }
 
         return response()->json($array);
 
@@ -119,12 +126,12 @@ class TrainingEmployeesController extends Controller
     public function getCountError()
     {
         $array['data'] = [];
-        $module = ['FireFighting','Evacuation','Leadership','FirstAid'];
+        $module = TrainingModule::select('module_name')->distinct()->get();
         foreach ($module as $item) {
-            $max = DB::table('training_employees')->where('module_attended',$item)->max('error');
-            $min = DB::table('training_employees')->where('module_attended',$item)->min('error');
-            $avg = DB::table('training_employees')->where('module_attended',$item)->avg('error');
-            array_push($array['data'],[$item,$max??0,$avg??0,$min??0]);
+            $max = DB::table('training_employees')->where('module_attended',$item->module_name)->max('error');
+            $min = DB::table('training_employees')->where('module_attended',$item->module_name)->min('error');
+            $avg = DB::table('training_employees')->where('module_attended',$item->module_name)->avg('error');
+            array_push($array['data'],[$item->module_name,$max??0,$avg??0,$min??0]);
         }
 
         return response()->json($array);
@@ -133,12 +140,12 @@ class TrainingEmployeesController extends Controller
     public function getCountTraining()
     {
         $array['data'] = [];
-        $module = ['FireFighting','Evacuation','Leadership','FirstAid'];
+        $module = TrainingModule::select('module_name')->distinct()->get();
         foreach ($module as $item) {
-            $max = DB::table('training_employees')->where('module_attended',$item)->max('training_hour');
-            $min = DB::table('training_employees')->where('module_attended',$item)->min('training_hour');
-            $avg = DB::table('training_employees')->where('module_attended',$item)->avg('training_hour');
-            array_push($array['data'],[$item,$max??0,$avg??0,$min??0]);
+            $max = DB::table('training_employees')->where('module_attended',$item->module_name)->max('training_hour');
+            $min = DB::table('training_employees')->where('module_attended',$item->module_name)->min('training_hour');
+            $avg = DB::table('training_employees')->where('module_attended',$item->module_name)->avg('training_hour');
+            array_push($array['data'],[$item->module_name,$max??0,$avg??0,$min??0]);
         }
 
         return response()->json($array);

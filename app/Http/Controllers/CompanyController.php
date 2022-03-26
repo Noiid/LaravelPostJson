@@ -7,6 +7,7 @@ use App\CompanyContacts;
 use App\TrainingModule;
 use App\Employees;
 use App\ContactEmployees;
+use App\MistakeTraining;
 use App\TrainingEmployees;
 use Illuminate\Http\Request;
 
@@ -19,13 +20,18 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $training_module = [['Fire Fighting',100],['Evacuation',130],['Leadership',150],['First Aid',300]];
+        $training_module = TrainingModule::all();
         $color_bg = ['red','green','yellow','blue'];
         $training = TrainingEmployees::all();
         $status_filter = ['Expiring Soon','Expired','Passed/complete','Passed/incomplete','Started','Not Started'];
         $module_filter = TrainingModule::all();
+        $emp_expiring = TrainingEmployees::where('status','Expiring Soon')->get();
+        $emp_expired = TrainingEmployees::where('status','Expired')->get();
+        $emp_certified = TrainingEmployees::where('status','Certified')->get();
+
         return view('Company.index',['training_module' => $training_module, 'color_bg' => $color_bg, 'training' => $training,
-        'status_filter' => $status_filter, 'module_filter' => $module_filter]);
+        'status_filter' => $status_filter, 'module_filter' => $module_filter,
+        'emp_expiring' => $emp_expiring, 'emp_expired' => $emp_expired, 'emp_certified' => $emp_certified]);
     }
 
     /**
@@ -63,11 +69,14 @@ class CompanyController extends Controller
         $training_module = $request->input('TrainingModule');
         if($training_module!=null){
             foreach ($training_module as $module) {
-                TrainingModule::create([
-                    'id_company' => $company->id_company,
-                    'module_name' => $module['ModuleName'],
-                    'average_training_hour' => $module['AverageTrainingHour']
-                ]);
+                $isExistModule = TrainingModule::where('id_company',$company->id_company)->where('module_name',$module['ModuleName'])->get();
+                if(!$isExistModule->isNotEmpty()){
+                    TrainingModule::create([
+                        'id_company' => $company->id_company,
+                        'module_name' => $module['ModuleName'],
+                        'average_training_hour' => $module['AverageTrainingHour']
+                    ]);
+                }
             }
         }
 
@@ -91,17 +100,32 @@ class CompanyController extends Controller
             $contact->email = $emp['contact']['email'];
             $contact->save();
 
-            foreach ($emp['Training'] as $tra) {
-                $training = new TrainingEmployees();
-                $training->id_employees = $pegawai->id_employees;
-                $training->module_attended = $tra['ModuleAttended'];
-                $training->test_date = date("Y-m-d", strtotime($tra['Date']));
-                $training->training_hour = $tra['TrainingHour'];
-                $training->error = $tra['Error'];
-                $training->status = $tra['Status'];
-                $training->renewal_date = date("Y-m-d", strtotime($tra['RenewalDate']));
-                $training->save();
+            if($emp['Training']!=null){
+                foreach ($emp['Training'] as $tra) {
+                    $training = new TrainingEmployees();
+                    $training->id_employees = $pegawai->id_employees;
+                    $training->module_attended = $tra['ModuleAttended'];
+                    $training->test_date = date("Y-m-d", strtotime($tra['Date']));
+                    $training->training_hour = $tra['TrainingHour'];
+                    $training->error = $tra['Error'];
+                    $training->status = $tra['Status'];
+                    $training->renewal_date = date("Y-m-d", strtotime($tra['RenewalDate']));
+                    $training->save();
+                }
             }
+
+            if($emp['Mistake']!=null){
+                foreach ($emp['Mistake'] as $miss) {
+                    $mistake = new MistakeTraining();
+                    $mistake->id_employees = $pegawai->id_employees;
+                    $mistake->module_attended = $miss['ModuleAttended'];
+                    $mistake->mistake_name = $miss['MistakeName'];
+                    $mistake->mistake_type = $miss['MistakeType'];
+                    $mistake->number_of_mistake = $miss['NumberOfMistake'];
+                    $mistake->save();
+                }
+            }
+
         }
         return 'Success';
     }

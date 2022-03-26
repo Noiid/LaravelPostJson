@@ -4,7 +4,7 @@
 <div class="main-content-inner">
     <div class="container">
         <div class="row mb-5">
-            <div class="col-xl-4 col-lg-4 mt-5">
+            <div class="col-xl-12 col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mb-0">Number of participants by module</h4><br>
@@ -12,7 +12,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 mt-5">
+        </div>
+        <div class="row mb-5">
+            <div class="col-xl-12 col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mb-0">Number of errors by module</h4><br>
@@ -20,7 +22,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-4 mt-5">
+        </div>
+        <div class="row mb-5">
+            <div class="col-xl-12 col-lg-12 mt-5">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="header-title mb-0">Number of training hours by module</h4><br>
@@ -61,17 +65,17 @@
         <div class="row mt-5 mb-5">
             <div class="col-xl-4 col-lg-4 mt-5">
                 <div class="card">
-                    <div id="ampiechart2"></div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 mt-5">
-                <div class="card">
-                    <div id="ampiechart3"></div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-4 mt-5">
-                <div class="card">
                     <div id="highpiechart4"></div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 mt-5">
+                <div class="card">
+                    <div id="highpiechart4_2"></div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 mt-5">
+                <div class="card">
+                    <div id="highpiechart4_3"></div>
                 </div>
             </div>
         </div>

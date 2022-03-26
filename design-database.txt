@@ -125,3 +125,56 @@ Revisi :
 5. Tombol Usage Summary => show all employee & all module training by employee
 
 
+contoh data baru :
+{
+   "Company":"mycompany",
+   "companycontacts":{
+      "phone":"123-123-1234",
+      "email":"myemail@domain.com"
+   },"TrainingModule":[{"ModuleName":"FireFighting","AverageTrainingHour": 1},  {"ModuleName":"Evacuation","AverageTrainingHour": 2}],
+   "Employees":[
+      {
+         "FirstName":"Tony",
+         "LastName":"Dep",
+         "Age":24,
+         "Gender":"Male",
+         "Department":"HSE",
+         "contact":{
+            "phone":"123-123-1234",
+            "email":"myemail@domain.com"
+         },
+         "StartDateofEmployment":"12-12-2021",
+		"Training": [
+			{"ModuleAttended":"FireFighting", "Date": "12-12-2021", "TrainingHour":0.48, "Error": 0, "Status":"Passed/complete", "RenewalDate":"12-12-2022"},
+			{"ModuleAttended":"Evacuation", "Date": "12-12-2021", "TrainingHour":1, "Error": 2,"Status":"Passed/complete", "RenewalDate":"12-12-2022"}
+	      ],
+	    "Mistake" : [
+	    	{"ModuleAttended":"FireFighting", "MistakeName":"wrong_choice", "MistakeType":"knowledge_type", "NumberOfMistake":2},
+	    	{"ModuleAttended":"FireFighting", "MistakeName":"wrong_procedure", "MistakeType":"rule_type", "NumberOfMistake":3},
+	    	{"ModuleAttended":"FireFighting", "MistakeName":"inaccurate", "MistakeType":"skill_type", "NumberOfMistake":1},
+	    	{"ModuleAttended":"Evacuation", "MistakeName":"wrong_choice", "MistakeType":"knowledge_type", "NumberOfMistake":4},
+	    	{"ModuleAttended":"Evacuation", "MistakeName":"inaccurate", "MistakeType":"skill_type", "NumberOfMistake":2}
+	    	]
+      },
+      {
+         "FirstName":"Dion",
+         "LastName":"Maulana",
+         "Age":24,
+         "Gender":"Male",
+         "Department":"HSE",
+		 "contact":{
+            "phone":"123-123-1234",
+            "email":"myemail@domain.com"
+         },
+         "StartDateofEmployment":"12-12-2021",
+         "Training": [
+         	{"ModuleAttended":"FireFighting", "Date": "12-12-2021", "TrainingHour":0.58, "Error": 0, "Status":"Passed/complete", "RenewalDate":"12-12-2022"},
+         	{"ModuleAttended":"Evacuation", "Date": "12-12-2021", "TrainingHour":1, "Error": 10, "Status":"Passed/incomplete", "RenewalDate":"12-12-2022"}],
+      	"Mistake" : [
+	    	{"ModuleAttended":"FireFighting", "MistakeName":"wrong_procedure", "MistakeType":"rule_type", "NumberOfMistake":2},
+	    	{"ModuleAttended":"FireFighting", "MistakeName":"inaccurate", "MistakeType":"skill_type", "NumberOfMistake":3},
+	    	{"ModuleAttended":"Evacuation", "MistakeName":"wrong_choice", "MistakeType":"knowledge_type", "NumberOfMistake":1},
+	    	{"ModuleAttended":"Evacuation", "MistakeName":"inaccurate", "MistakeType":"skill_type", "NumberOfMistake":1}
+	    	]
+      }]}
+

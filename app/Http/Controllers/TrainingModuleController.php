@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\TrainingModule;
 use App\Company;
+use App\TrainingEmployees;
 use Illuminate\Http\Request;
 
 class TrainingModuleController extends Controller
@@ -16,8 +17,8 @@ class TrainingModuleController extends Controller
     public function index()
     {
         $modules = TrainingModule::all();
-
-        return view('Modul.index',['modules' => $modules]);
+        $training_employee = TrainingEmployees::all();
+        return view('Modul.index',['modules' => $modules, 'training' => $training_employee]);
     }
 
     /**

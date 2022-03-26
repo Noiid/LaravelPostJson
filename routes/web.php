@@ -21,6 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/getParticipantsModule', 'TrainingEmployeesController@getParticipantsModule');
     Route::get('/getCountError', 'TrainingEmployeesController@getCountError');
     Route::get('/getCountTraining', 'TrainingEmployeesController@getCountTraining');
+    Route::get('/getMistakes/{module}', 'MistakeTrainingController@getMistakes');
+
 
 
     Route::prefix('module')->group(function (){

@@ -1,5 +1,5 @@
 @extends('layouts.dashboard2')
-@section('title','Training Dashboard')
+@section('title','Data Users')
 @section('content-inner')
 <div class="main-content-inner">
     <div class="container-fluid">

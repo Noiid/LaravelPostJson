@@ -1,5 +1,5 @@
 @extends('layouts.dashboard2')
-@section('title','Training Dashboard')
+@section('title','Summary Module')
 @section('content-inner')
 <div class="main-content-inner">
     <div class="container-fluid">
@@ -43,15 +43,21 @@
                                         <tr>
                                             <td>{{ $loop->index+1 }}</td>
                                             <td>{{ $module->module_name }}</td>
-                                            <td>{{ $module->number_of_participants }}</td>
-                                            <td>Avg : {{ $module->average_training_hour??0 }} <br>
-                                                Max : {{ $module->max_training_hour??0 }} <br>
-                                                Min : {{ $module->min_training_hour??0 }}</td>
-                                            <td>Avg : {{ $module->average_error??0 }} <br>
-                                                Max : {{ $module->max_error??0 }} <br>
-                                                Min : {{ $module->min_error??0 }}</td>
-                                            <td>Passed : {{ $module->percent_pass??0 }} <br>
-                                                Failed : {{ $module->percent_fail??0 }}</td>
+                                            <td>{{ count($training->where('module_attended',$module->module_name)) }}</td>
+                                            <td>Avg : {{ $training->where('module_attended',$module->module_name)->avg('training_hour')??0 }} <br>
+                                                Max : {{ $training->where('module_attended',$module->module_name)->max('training_hour')??0 }} <br>
+                                                Min : {{ $training->where('module_attended',$module->module_name)->min('training_hour')??0 }}</td>
+                                            <td>Avg : {{ $training->where('module_attended',$module->module_name)->avg('error')??0 }} <br>
+                                                Max : {{ $training->where('module_attended',$module->module_name)->max('error')??0 }} <br>
+                                                Min : {{ $training->where('module_attended',$module->module_name)->min('error')??0 }}</td>
+
+                                            @php
+                                                $tra_complete = count(App\TrainingEmployees::where('module_attended',$module->module_name)->where('status','LIKE','%Passed%')->get());
+                                                $tra_fail = count(App\TrainingEmployees::where('module_attended',$module->module_name)->where('status','NOT LIKE','%Passed%')->get());
+                                                $tra_all = count(App\TrainingEmployees::where('module_attended',$module->module_name)->get());
+                                            @endphp
+                                            <td>Passed : {{ ($tra_all > 0) ? ($tra_complete / $tra_all * 100)??0 : 0 }}% <br>
+                                                Failed : {{ ($tra_all > 0) ? ($tra_fail / $tra_all * 100)??0 : 0 }}%</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -447,11 +447,23 @@ if ($('#ambarchart3').length) {
         dataType: 'json',
         success: function (response) {
             response_bar = response['data'];
+            var hasil = [];
+            for (let index = 0; index < response_bar.length; index++) {
+                hasil.push({
+                    "year": response_bar[index][0],
+                    "income": response_bar[index][1],
+                    "expenses": 18.1,
+                    "color": "#7474f0",
+                    "color2": "#C5C5FD"
+                });
+            }
+            console.log("hasil : ");
+            console.log(hasil);
             var chart = AmCharts.makeChart("ambarchart3", {
                 "type": "serial",
                 "theme": "light",
                 "categoryField": "year",
-                "rotate": true,
+                // "rotate": true,
                 "startDuration": 1,
                 "categoryAxis": {
                     "gridPosition": "start",
@@ -472,41 +484,13 @@ if ($('#ambarchart3').length) {
                 "guides": [],
                 "valueAxes": [{
                     "id": "ValueAxis-1",
-                    "position": "top",
+                    "position": "left",
                     "axisAlpha": 0
                 }],
                 "allLabels": [],
                 "balloon": {},
                 "titles": [],
-                "dataProvider": [{
-                        "year": response_bar[0][0],
-                        "income": response_bar[0][1],
-                        "expenses": 18.1,
-                        "color": "#7474f0",
-                        "color2": "#C5C5FD"
-                    },
-                    {
-                        "year": response_bar[1][0],
-                        "income": response_bar[1][1],
-                        "expenses": 22.8,
-                        "color": "#7474f0",
-                        "color2": "#C5C5FD"
-                    },
-                    {
-                        "year": response_bar[2][0],
-                        "income": response_bar[2][1],
-                        "expenses": 23.9,
-                        "color": "#7474f0",
-                        "color2": "#C5C5FD"
-                    },
-                    {
-                        "year": response_bar[3][0],
-                        "income": response_bar[3][1],
-                        "expenses": 25.1,
-                        "color": "#7474f0",
-                        "color2": "#C5C5FD"
-                    }
-                ],
+                "dataProvider": hasil,
                 "export": {
                     "enabled": false
                 }
@@ -524,44 +508,26 @@ if ($('#ambarchart4').length) {
         type: 'get',
         dataType: 'json',
         success: function (response) {
-            count = response['data'];
+            response_bar = response['data'];
+            var hasil = [];
+            for (let index = 0; index < response_bar.length; index++) {
+                hasil.push({
+                    "module": response_bar[index][0],
+                    "max": response_bar[index][1],
+                    "average" : response_bar[index][2],
+                    "min" : response_bar[index][3],
+                    "color": "#8918FE",
+                    "color2" : "#7474F0",
+                    "color3" : "#C5C5FD"
+                });
+            }
+            console.log("hasil error : ");
+            console.log(hasil);
             var chart = AmCharts.makeChart("ambarchart4", {
                 "type": "serial",
                 "theme": "light",
                 "marginRight": 70,
-                "dataProvider": [{
-                    "module": count[0][0],
-                    "max": count[0][1],
-                    "average" : count[0][2],
-                    "min" : count[0][3],
-                    "color": "#8918FE",
-                    "color2" : "#7474F0",
-                    "color3" : "#C5C5FD"
-                }, {
-                    "module": count[1][0],
-                    "max": count[1][1],
-                    "average" : count[1][2],
-                    "min" : count[1][3],
-                    "color": "#8918FE",
-                    "color2" : "#7474F0",
-                    "color3" : "#C5C5FD"
-                }, {
-                    "module": count[2][0],
-                    "max": count[2][1],
-                    "average" : count[2][2],
-                    "min" : count[2][3],
-                    "color": "#8918FE",
-                    "color2" : "#7474F0",
-                    "color3" : "#C5C5FD"
-                }, {
-                    "module": count[3][0],
-                    "max": count[3][1],
-                    "average" : count[3][2],
-                    "min" : count[3][3],
-                    "color": "#8918FE",
-                    "color2" : "#7474F0",
-                    "color3" : "#C5C5FD"
-                }],
+                "dataProvider": hasil,
                 "valueAxes": [{
                     "axisAlpha": 0,
                     "position": "left",
@@ -630,44 +596,26 @@ if ($('#ambarchart5').length) {
         type: 'get',
         dataType: 'json',
         success: function (response) {
-            count = response['data'];
+            response_bar = response['data'];
+            var hasil = [];
+            for (let index = 0; index < response_bar.length; index++) {
+                hasil.push({
+                    "module": response_bar[index][0],
+                    "max": response_bar[index][1],
+                    "average" : response_bar[index][2],
+                    "min" : response_bar[index][3],
+                    "color": "#028a48",
+                    "color2" : "#16dd7d",
+                    "color3" : "#9ae2bf"
+                });
+            }
+            console.log("hasil training : ");
+            console.log(hasil);
             var chart = AmCharts.makeChart("ambarchart5", {
                 "type": "serial",
                 "theme": "light",
                 "marginRight": 70,
-                "dataProvider": [{
-                    "module": count[0][0],
-                    "max": count[0][1],
-                    "average" : count[0][2],
-                    "min" : count[0][3],
-                    "color": "#028a48",
-                    "color2" : "#16dd7d",
-                    "color3" : "#9ae2bf"
-                }, {
-                    "module": count[1][0],
-                    "max": count[1][1],
-                    "average" : count[1][2],
-                    "min" : count[1][3],
-                    "color": "#028a48",
-                    "color2" : "#16dd7d",
-                    "color3" : "#9ae2bf"
-                }, {
-                    "module": count[2][0],
-                    "max": count[2][1],
-                    "average" : count[2][2],
-                    "min" : count[2][3],
-                    "color": "#028a48",
-                    "color2" : "#16dd7d",
-                    "color3" : "#9ae2bf"
-                }, {
-                    "module": count[3][0],
-                    "max": count[3][1],
-                    "average" : count[3][2],
-                    "min" : count[3][3],
-                    "color": "#028a48",
-                    "color2" : "#16dd7d",
-                    "color3" : "#9ae2bf"
-                }],
+                "dataProvider": hasil,
                 "valueAxes": [{
                     "axisAlpha": 0,
                     "position": "left",
