@@ -439,17 +439,17 @@ if ($('#highpiechart4').length) {
                 var count = 0;
                 for (let index = 0; index < len; index++) {
                     count += result[index].number_of_mistake;
-                    type.push(result[index].mistake_type);
+                    type.push(result[index].mistake_name);
                 }
                 var typeDistinct = type.filter(distinct);
                 for (let index = 0; index < typeDistinct.length; index++) {
-                    var filterObject = result.filter(x => x.mistake_type == typeDistinct[index])
+                    var filterObject = result.filter(x => x.mistake_name == typeDistinct[index])
                         .reduce(function (acc, obj) {return acc + obj.number_of_mistake}, 0);
                     console.log('filter');
                     console.log(filterObject);
                     bagi = filterObject / count * 100;
                     hasil.push({
-                        name: result[index].mistake_type, y: bagi
+                        name: result[index].mistake_name, y: bagi
                     });
                 }
             }else{
@@ -531,17 +531,17 @@ if ($('#highpiechart4_2').length) {
                 var count = 0;
                 for (let index = 0; index < len; index++) {
                     count += result[index].number_of_mistake;
-                    type.push(result[index].mistake_type);
+                    type.push(result[index].mistake_name);
                 }
                 var typeDistinct = type.filter(distinct);
                 for (let index = 0; index < typeDistinct.length; index++) {
-                    var filterObject = result.filter(x => x.mistake_type == typeDistinct[index])
+                    var filterObject = result.filter(x => x.mistake_name == typeDistinct[index])
                         .reduce(function (acc, obj) {return acc + obj.number_of_mistake}, 0);
                     console.log('filter');
                     console.log(filterObject);
                     bagi = filterObject / count * 100;
                     hasil.push({
-                        name: result[index].mistake_type, y: bagi
+                        name: result[index].mistake_name, y: bagi
                     });
                 }
             }else{
@@ -623,17 +623,17 @@ if ($('#highpiechart4_3').length) {
                 var count = 0;
                 for (let index = 0; index < len; index++) {
                     count += result[index].number_of_mistake;
-                    type.push(result[index].mistake_type);
+                    type.push(result[index].mistake_name);
                 }
                 var typeDistinct = type.filter(distinct);
                 for (let index = 0; index < typeDistinct.length; index++) {
-                    var filterObject = result.filter(x => x.mistake_type == typeDistinct[index])
+                    var filterObject = result.filter(x => x.mistake_name == typeDistinct[index])
                         .reduce(function (acc, obj) {return acc + obj.number_of_mistake}, 0);
                     console.log('filter');
                     console.log(filterObject);
                     bagi = filterObject / count * 100;
                     hasil.push({
-                        name: result[index].mistake_type, y: bagi
+                        name: result[index].mistake_name, y: bagi
                     });
                 }
             }else{
